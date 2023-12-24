@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: center;
+    background-color: #000000;
+    color: #000000;
+}
+
+.table {
+    background-color: #287233;
+    padding: 1.5em;
+    border-radius: 3em;
+    border: 0.2em solid #A52A2A;
+    margin-bottom: 1.5em;
+}
+
+.result {
+    display: block;
+    font-size: 1.5em;
+    height: 1.75em;
+    color: #ff0000;
+    padding: 0;
+    margin: 0;
+}
+
+.cards {
+    min-height: 11em;
+}
+
+.cards img {
+    height: 10.5em;
+    width: 7.5em;
+    margin: 0.1em;
+}
+
+
+button {
+    width: 7em;
+    height: 2.5em;
+    font-size: 1.5em;
+    background-color: #4676D7;
+    border-radius: 0.5em;
+    margin: 0 0.5em;
+    color: #ffffff;
+    border: 0.1em solid #ffffff;
+}
+
+.end-game #play-buttons {
+    display: none;
+}
+
+#start {
+    display: none;
+}
+
+.end-game #start {
+    display: inline-block;
+}
+
+#dealer-cards img:nth-child(2) {
+    display: none;
+}
+
+.end-game #dealer-cards img:nth-child(2) {
+    display: inline;
+}
+
+.end-game #dealer-cards #back {
+    display: none;
+}
+
