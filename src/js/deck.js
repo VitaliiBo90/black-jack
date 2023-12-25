@@ -19,16 +19,18 @@ export class Deck {
      * @returns {Array<Card>}
      */
     getShuffledDeck() {
-        const cards = this.createDeack();
+        const cards = this.createDeck(types, values);
         
         return this.shuffleDeck(cards);
     }
 
     /**
      * Add all possible cards to deck
+     * @param {Array<string>} types - constant
+     * @param {Array<string>} values - constant
      * @returns {Array<Card>}
      */
-    createDeack() {
+    createDeck(types, values) {
         let cards = [];
 
         for (let i = 0; i < types.length; i++) {
@@ -61,5 +63,7 @@ export class Deck {
      * @param {number} value
      * @returns {number}
      */
-    getRandomIndex = (value) => Math.floor(Math.random() * value);
+    getRandomIndex(value) {
+        return Math.floor(Math.random() * value);
+    }
 }

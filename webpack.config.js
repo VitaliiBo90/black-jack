@@ -28,10 +28,6 @@ module.exports = {
         include: path.resolve(__dirname, 'src/css/main.css'),
         use: [MiniCssExtractPlugin.loader, 'css-loader'],
       },
-      // {
-      //   test: /\.(png|svg|jpg|jpeg|gif)$/i,
-      //   type: 'asset/resource'
-      // }
       {
         test: /\.jpe?g$|\.gif$|\.png$|\.PNG$|\.svg$|\.woff(2)?$|\.ttf$|\.eot$/,
         loader: 'file-loader',

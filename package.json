@@ -3,9 +3,10 @@
     "http-server": "^14.1.1"
   },
   "scripts": {
-    "start": "http-server ./dist -c-1 -p 8081",
+    "start": "http-server ./dist -c-1 -p 8081 -o",
     "build": "webpack",
-    "test": "jest"
+    "test": "jest",
+    "doc": "http-server ./out -c-1 -p 8081 -o"
   },
   "devDependencies": {
     "@babel/core": "^7.23.6",
