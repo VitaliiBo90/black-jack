@@ -1,9 +1,10 @@
 import { Game } from '../js/game.js';
 import { Hand } from '../js/hand.js';
+import { endGameMsgs } from '../constants.js';
 
 let game;
 
-describe('Index ', () => {
+describe('Game ', () => {
     beforeAll(() => {
         document.body.innerHTML =
             '<div id="main-container" class="main-container end-game">' +
@@ -35,7 +36,7 @@ describe('Index ', () => {
             jest.clearAllMocks();
         });
 
-        test('should have correct hand and classes in html', () => {
+        test('should have correct classes in html', () => {
             expect(document.getElementById('main-container').classList.contains('end-game')).toBe(false);
             expect(document.getElementById('result').innerHTML).toBe('');
             expect(document.getElementById('player-score').innerHTML).toBe('');
@@ -44,11 +45,10 @@ describe('Index ', () => {
 
         test('hands should have correct amount of cards in dom', () => {
             expect(document.getElementById('player-cards').children.length).toBe(2);
-            // dealer has 3 cards because first on is back card
-            expect(document.getElementById('dealer-cards').children.length).toBe(3);
+            expect(document.getElementById('dealer-cards').children.length).toBe(2);
         });
 
-        test('hands should have correct amount of cards', () => {
+        test('hands should have correct amount of addCard calls', () => {
             // addCard called twice for player and dealer
             expect(Hand.prototype.addCard).toHaveBeenCalledTimes(4);
         });
@@ -56,21 +56,100 @@ describe('Index ', () => {
 
     describe('hit ', () => {
         beforeEach(() => {
+            game.player.score = 0;
+
             jest.spyOn(Hand.prototype, 'addCard');
-            game.hit();
+            jest.spyOn(Game.prototype, 'addCard');
+            jest.spyOn(Game.prototype, 'rotateBackCard');
+            jest.spyOn(Game.prototype, 'endGame');
         });
 
         afterEach(() => {
             jest.clearAllMocks();
         });
 
-        test(' should call addCard method', () => { 
+        test('should call Hand addCard method', () => { 
+            game.hit();
             expect(Hand.prototype.addCard).toHaveBeenCalledTimes(1);
         });
 
-        test(' should call stay method if user score 21', () => {
+        test('should call Game addCard method with player parameter', () => { 
+            game.hit();
+            expect(Game.prototype.addCard).toHaveBeenCalledTimes(1);
+            expect(Game.prototype.addCard).toHaveBeenCalledWith(game.player);
+        });
+
+        test('should call stay end game if user score more than 21', () => {
             game.player.score = 21;
-            expect(Hand.prototype.addCard).toHaveBeenCalledTimes(1);
+            game.hit();
+            expect(Game.prototype.rotateBackCard).toHaveBeenCalledTimes(1);
+            expect(Game.prototype.endGame).toHaveBeenCalledTimes(1);
+            expect(Game.prototype.endGame).toHaveBeenCalledWith(endGameMsgs.loose);
         });
     });
+
+    describe('stay ', () => {
+        beforeEach(() => {
+            game.player.score = 0;
+            game.dealer.score = 0;
+            jest.spyOn(Game.prototype, 'addCard');
+            jest.spyOn(Game.prototype, 'rotateBackCard');
+            jest.spyOn(Game.prototype, 'endGame');
+        });
+
+        afterEach(() => {
+            jest.clearAllMocks();
+        });
+
+        test('should call rotateBackCard', () => { 
+            game.stay();
+            expect(Game.prototype.rotateBackCard).toHaveBeenCalledTimes(1);
+        });
+
+        test('should call addCard if dealer.score <= player.score and dealer score != 21', () => { 
+            game.player.score = 18;
+            game.dealer.score = 17;
+
+            game.stay();
+            expect(Game.prototype.addCard).toHaveBeenCalledTimes(1);
+            expect(Game.prototype.addCard).toHaveBeenCalledWith(game.dealer);
+        });
+
+        test('should call endGame with win parameter if dealer.score > 21', () => { 
+            game.dealer.score = 22;
+
+            game.stay();
+            expect(Game.prototype.endGame).toHaveBeenCalledTimes(1);
+            expect(Game.prototype.endGame).toHaveBeenCalledWith(endGameMsgs.win);
+        });
+
+        test('should call endGame with draw parameter if dealer.score = 21 and dealer.score = player.score', () => { 
+            game.dealer.score = 21;
+            game.player.score = 21;
+
+            game.stay();
+            expect(Game.prototype.endGame).toHaveBeenCalledTimes(1);
+            expect(Game.prototype.endGame).toHaveBeenCalledWith(endGameMsgs.draw);
+        });
+
+        test('should call endGame with loose parameter if and dealer.score > player.score and dealer.score <= 21', () => { 
+            game.dealer.score = 18;
+            game.player.score = 17;
+
+            game.stay();
+            expect(Game.prototype.endGame).toHaveBeenCalledTimes(1);
+            expect(Game.prototype.endGame).toHaveBeenCalledWith(endGameMsgs.loose);
+        });
+
+        test('should have correct classes in html', () => {
+            game.player.score = 18;
+            game.dealer.score = 22; 
+            game.stay();
+
+            expect(document.getElementById('main-container').classList.contains('end-game')).toBe(true);
+            expect(document.getElementById('result').innerHTML).toBe(endGameMsgs.win);
+            expect(document.getElementById('player-score').innerHTML).toBe('18');
+            expect(document.getElementById('dealer-score').innerHTML).toBe('22');
+        });
+    })
 });

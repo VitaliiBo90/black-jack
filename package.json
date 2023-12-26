@@ -5,8 +5,9 @@
   "scripts": {
     "start": "http-server ./dist -c-1 -p 8081 -o",
     "build": "webpack",
-    "test": "jest",
-    "doc": "http-server ./out -c-1 -p 8081 -o"
+    "test": "jest --coverage",
+    "generate-doc": "jsdoc src/js/",
+    "doc": "http-server ./out -c-1 -p 3030 -o"
   },
   "devDependencies": {
     "@babel/core": "^7.23.6",

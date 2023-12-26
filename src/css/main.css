@@ -55,16 +55,3 @@ button {
 .end-game #start {
     display: inline-block;
 }
-
-#dealer-cards img:nth-child(2) {
-    display: none;
-}
-
-.end-game #dealer-cards img:nth-child(2) {
-    display: inline;
-}
-
-.end-game #dealer-cards #back {
-    display: none;
-}
-

@@ -12,6 +12,7 @@ export class Hand {
         this.name = name;
         this.score = 0;
         this.aceCount = 0;
+        this.cards = [];
     }
 
     /**
@@ -19,6 +20,7 @@ export class Hand {
      * @param {Card} card 
      */
     addCard(card) {
+        this.cards.push(card);
         this.score += this.getCardScore(card);
 
         this.recalculateForAce();
