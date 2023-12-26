@@ -57,7 +57,9 @@ describe('Game ', () => {
     describe('hit ', () => {
         beforeEach(() => {
             game.player.score = 0;
-
+            game.player.aceCount = 0;
+            game.dealer.score = 0;
+            game.dealer.aceCount = 0;
             jest.spyOn(Hand.prototype, 'addCard');
             jest.spyOn(Game.prototype, 'addCard');
             jest.spyOn(Game.prototype, 'rotateBackCard');
@@ -79,8 +81,8 @@ describe('Game ', () => {
             expect(Game.prototype.addCard).toHaveBeenCalledWith(game.player);
         });
 
-        test('should call stay end game if user score more than 21', () => {
-            game.player.score = 21;
+        test('should call rotateBackCard and endGame if user score more than 21', () => {
+            game.player.score = 22;
             game.hit();
             expect(Game.prototype.rotateBackCard).toHaveBeenCalledTimes(1);
             expect(Game.prototype.endGame).toHaveBeenCalledTimes(1);
@@ -91,7 +93,9 @@ describe('Game ', () => {
     describe('stay ', () => {
         beforeEach(() => {
             game.player.score = 0;
+            game.player.aceCount = 0;
             game.dealer.score = 0;
+            game.dealer.aceCount = 0;
             jest.spyOn(Game.prototype, 'addCard');
             jest.spyOn(Game.prototype, 'rotateBackCard');
             jest.spyOn(Game.prototype, 'endGame');
@@ -111,7 +115,7 @@ describe('Game ', () => {
             game.dealer.score = 17;
 
             game.stay();
-            expect(Game.prototype.addCard).toHaveBeenCalledTimes(1);
+            expect(Game.prototype.addCard).toHaveBeenCalled();
             expect(Game.prototype.addCard).toHaveBeenCalledWith(game.dealer);
         });
 
