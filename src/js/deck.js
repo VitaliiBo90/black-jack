@@ -49,8 +49,8 @@ export class Deck {
      */
     shuffleDeck(cards) {
         for (let i = 0; i < cards.length; i++) {
-            let randomIndex = this.getRandomIndex(cards.length);
-            let temp = cards[i];
+            const randomIndex = this.getRandomIndex(cards.length);
+            const temp = cards[i];
             cards[i] = cards[randomIndex];
             cards[randomIndex] = temp;
         }

@@ -5,7 +5,7 @@
 
 export class Card {
     /**
-     * Card cosntructor
+     * Card constructor
      * @param {string} value - Card value
      * @param {string} type - Card type
      */

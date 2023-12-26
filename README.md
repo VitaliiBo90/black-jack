@@ -1,17 +1,17 @@
 # Black Jack Game
 
 ## How to start project
-  1. In termainal run **"npm i"** to install all needed node modules.
-  2. In terminal run **"npm run build"**. Webpack will build the progect in **dist/** folder.
+  1. In terminal run **"npm i"** to install all needed node modules.
+  2. In terminal run **"npm run build"**. Webpack will build the project in **dist/** folder.
   3. In terminal run **"npm run start"**. http-server will be launched on **http://localhost:8081/** and default browser window will open the Black Jack Game.
 
 ## How to run test
-  1. In terminal run **"npm run test"**. All test suites will be runned and in the end you will see test coverage.
+  1. In terminal run **"npm run test"**. All test suites will be run and in the end you will see test coverage.
 
-## How to read and generate progect documentation
+## How to read and generate project documentation
   Documentation is generated automaticaly by using jsDoc 3 tool.
 
-  To read documentaion in terminal run **"npm run doc"**. http-server will be launched on **http://localhost:3030/** and default browser window will progect documentation.
+  To read documentaion in terminal run **"npm run doc"**. http-server will be launched on **http://localhost:3030/** and default browser window will project documentation.
  
   To generate documentation please forward next steps
   1. In terminal run **"npm install -g jsdoc"**.

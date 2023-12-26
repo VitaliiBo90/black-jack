@@ -44,7 +44,7 @@ export class Hand {
     }
 
     /**
-     * Recalculate hand points if hand get more then 21 points and has Ace
+     * Recalculate hand points if hand get more than 21 points and has Ace
      */
     recalculateForAce() {
         if (this.score > 21 && this.aceCount > 0) {

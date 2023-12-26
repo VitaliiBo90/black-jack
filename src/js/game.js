@@ -21,7 +21,7 @@ export class Game {
     }
     
     /**
-     * Adding event listners to buttons
+     * Adding event listeners to buttons
      */
     addEventListeners() {
         document.getElementById("start").addEventListener("click", this.start.bind(this));
@@ -41,7 +41,7 @@ export class Game {
         document.getElementById('main-container').classList.remove('end-game');
         document.getElementById('result').innerHTML = '';
         document.getElementById(`${this.player.name}-cards`).innerHTML = '';
-        document.getElementById(`${this.dealer.name}-cards`).innerHTML = '<img id="back" src="../cards/Back.png">';
+        document.getElementById(`${this.dealer.name}-cards`).innerHTML = '<img id="back" src="../cards/BACK.png">';
         document.getElementById(`${this.player.name}-score`).innerHTML = '';
         document.getElementById(`${this.dealer.name}-score`).innerHTML = '';
     
@@ -94,8 +94,8 @@ export class Game {
     }
 
     /**
-     * Pick card from the the deck, add to hand and render card on the table
-     * @param {Hand} hand - can be this.player or this.dealer
+     * Pick card from the deck, add to hand and render card on the table
+     * @param {Hand} hand - can be player or dealer
      */
     addCard(hand) {
         const card = this.deck.cards.pop();
